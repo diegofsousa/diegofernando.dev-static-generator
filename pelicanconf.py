@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 AUTHOR = u'Diego Fernando'
 SITENAME = u'Diego Fernando'
 SITESUBTITLE = "I'm a technology enthusiast and programmer"
-SITEURL = 'http://diegofernando.dev'
+SITEURL = 'https://diegofernando.dev'
 
 PATH = 'content'
 
@@ -44,7 +44,7 @@ PAGINATION_PATTERNS = (
 )
 
 # Uncomment following line if you want document-relative URLs when developing
-RELATIVE_URLS = True
+# RELATIVE_URLS = True
 
 STATIC_PATHS = ['assets']
 
@@ -55,8 +55,8 @@ EXTRA_PATH_METADATA = {
 }
 
 # Post and Pages path
-ARTICLE_URL = '{date:%Y}/{date:%m}/{slug}.html'
-ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{slug}.html'
+ARTICLE_URL = '{slug}.html'
+ARTICLE_SAVE_AS = '{slug}.html'
 PAGE_URL = 'pages/{slug}/'
 PAGE_SAVE_AS = 'pages/{slug}/index.html'
 YEAR_ARCHIVE_SAVE_AS = '{date:%Y}/index.html'
