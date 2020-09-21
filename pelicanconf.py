@@ -44,7 +44,7 @@ PAGINATION_PATTERNS = (
 )
 
 # Uncomment following line if you want document-relative URLs when developing
-# RELATIVE_URLS = True
+RELATIVE_URLS = True
 
 STATIC_PATHS = ['assets']
 
@@ -128,7 +128,7 @@ HEADER_COVERS_BY_TAG = {'cupcake': 'assets/images/rainbow_cupcake_cover.png', 'g
 AUTHORS_BIO = {
   "diego": {
     "name": "Diego Fernando",
-    "cover": "https://casper.ghost.org/v1.0.0/images/team.jpg",
+    "cover": "assets/images/diegocapa.jpg",
     "image": "assets/images/avatar.jpeg",
     "website": "http://diegofernando.dev",
     "linkedin": "diegofsousa",
@@ -150,3 +150,4 @@ JINJA_ENVIRONMENT = {
 }
 
 JINJA_FILTERS = {'max': max}
+GOOGLE_ANALYTICS = "UA-178470984-1"

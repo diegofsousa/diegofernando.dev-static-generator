@@ -1,7 +1,7 @@
 title: [PT] Podcast aula - Scala e microserviços
 date: 2020-05-24 01:47
 author: diego
-tags: programação, scala, microserviços, lagom, aula
+tags: programação, scala, microserviços, lagom, aula, podcast
 slug: podcast-aula-scala-microservicos
 og_image: assets/images/scala-spider-web.jpg
 
