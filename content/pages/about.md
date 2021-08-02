@@ -12,5 +12,3 @@ I currently have a bachelor's degree in Information Systems at the Federal Unive
 
 > [Find me on LinkedIn](https://www.linkedin.com/in/diegofsousa/)
 
-> [My CV](/assets/Curriculo__Diego.pdf)
-
