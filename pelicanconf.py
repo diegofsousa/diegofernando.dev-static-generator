@@ -124,16 +124,17 @@ HOME_COVER = 'assets/images/fiber.jpg'
 # Custom Header
 
 HEADER_COVERS_BY_TAG = {'cupcake': 'assets/images/rainbow_cupcake_cover.png', 'general':'https://casper.ghost.org/v1.0.0/images/writing.jpg'}
+HEADER_COVERS_BY_CATEGORY = {'cupcake': 'assets/images/rainbow_cupcake_cover.png', 'general':'https://casper.ghost.org/v1.0.0/images/writing.jpg'}
 
 AUTHORS_BIO = {
   "diego": {
     "name": "Diego Fernando",
     "cover": "assets/images/diegocapa.jpg",
     "image": "assets/images/avatar.jpeg",
-    "website": "http://diegofernando.dev",
+    "website": "https://diegofernando.dev",
     "linkedin": "diegofsousa",
     "github": "diegofsousa",
-    "location": "Fortaleza/CE/Brazil",
+    "location": "Brazil",
     "bio": "Now is better than never."
   }
 }
