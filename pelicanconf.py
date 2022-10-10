@@ -130,12 +130,12 @@ AUTHORS_BIO = {
   "diego": {
     "name": "Diego Fernando",
     "cover": "assets/images/diegocapa.jpg",
-    "image": "assets/images/avatar.jpeg",
+    "image": "assets/images/eu-df.jpeg",
     "website": "https://diegofernando.dev",
     "linkedin": "diegofsousa",
     "github": "diegofsousa",
     "location": "Brazil",
-    "bio": "Now is better than never."
+    "bio": "Software Engineer. Enthusiast of distributed systems, programming languages and Brazilian music. Proudly born and raised in northeastern Brazil ❤️."
   }
 }
 
