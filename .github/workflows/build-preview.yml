@@ -6,6 +6,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Bate com TIMEZONE em pelicanconf.py. Sem isso, o runner (UTC)
+      # interpreta o mtime dos arquivos com o offset errado e todo
+      # article:modified_time sai adiantado em 3 horas.
+      TZ: America/Fortaleza
     steps:
       - uses: actions/checkout@v4
         with:
