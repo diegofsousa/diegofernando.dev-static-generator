@@ -14,6 +14,8 @@ DEFAULT_DATE = 'fs'
 
 DEFAULT_DATE_FORMAT = '%d %b %Y'
 
+LOCALE = 'pt_BR.UTF-8'
+
 TIMEZONE = 'America/Fortaleza'
 
 DEFAULT_LANG = u'pt-br'

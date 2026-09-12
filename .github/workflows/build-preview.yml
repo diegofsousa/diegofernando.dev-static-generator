@@ -8,12 +8,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
+      - run: sudo locale-gen pt_BR.UTF-8
+
       - run: pip install -r requirements.txt
+
+      # Um checkout novo zera o mtime de todo arquivo pra "agora". Como
+      # DEFAULT_DATE='fs' faz o Pelican usar o mtime como data de
+      # modificação do post, sem isso todo artigo apareceria como
+      # "Updated on" a data do build, mesmo sem edição real.
+      - name: Restore content mtimes from git history
+        run: |
+          find content -type f | while read -r f; do
+            ts=$(git log -1 --format=%ct -- "$f")
+            if [ -n "$ts" ]; then
+              touch -d "@$ts" "$f"
+            fi
+          done
 
       - run: python -m pelican content -s publishconf.py -o output
 
