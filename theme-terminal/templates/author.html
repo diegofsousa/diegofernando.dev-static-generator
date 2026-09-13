@@ -8,10 +8,30 @@
 
 {% block content %}
 <main>
-  <p class="section-label">{{ UI_STRINGS.posts_by[DEFAULT_LANG] }} {{ author_name }} ({{ articles|count }})</p>
-  {% if bio and bio.bio %}
-  <p class="post-content" style="margin-bottom:22px;">{{ bio.bio }}</p>
+  {% if bio %}
+  <div class="bio" style="margin-bottom:26px; max-width:none;">
+    <div class="avatar">
+      {% if bio.image %}
+        {% if bio.image|lower|truncate(4, True, '') == "http" %}
+          <img src="{{ bio.image }}" alt="{{ author_name }}">
+        {% else %}
+          <img src="/{{ bio.image }}" alt="{{ author_name }}">
+        {% endif %}
+      {% else %}
+        {{ author_name.split(' ')[:2]|map('first')|map('upper')|join('') }}
+      {% endif %}
+    </div>
+    <div class="who">
+      <b>{{ author_name }}</b>
+      {% if bio.bio %}<p>{{ bio.bio }}</p>{% endif %}
+      <div class="links">
+        {% if bio.github %}<a href="https://github.com/{{ bio.github }}" target="_blank" rel="noopener">github ↗</a>{% endif %}
+        {% if bio.linkedin %}<a href="https://www.linkedin.com/in/{{ bio.linkedin }}/" target="_blank" rel="noopener">linkedin ↗</a>{% endif %}
+      </div>
+    </div>
+  </div>
   {% endif %}
+  <p class="section-label">{{ UI_STRINGS.posts_by[DEFAULT_LANG] }} {{ author_name }} ({{ articles|count }})</p>
   {% include "partials/loop.html" %}
 </main>
 {% endblock content %}

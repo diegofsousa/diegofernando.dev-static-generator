@@ -37,14 +37,31 @@
   <div class="post-meta">
     {% for author in article.authors %}
       {% set author_name = author.name|title %}
+      {% set author_avatar = None %}
       {% if AUTHORS_BIO and author.name.lower() in AUTHORS_BIO %}
         {% set author_name = AUTHORS_BIO[author.name.lower()].name or author.name %}
+        {% set author_avatar = AUTHORS_BIO[author.name.lower()].image %}
       {% endif %}
-      <span><b><a href="{{ SITEURL }}/{{ author.url }}">{{ author_name }}</a></b></span>
+      <a href="{{ SITEURL }}/{{ author.url }}" class="post-byline-avatar">
+        {% if author_avatar %}
+          {% if author_avatar|lower|truncate(4, True, '') == "http" %}
+            <img src="{{ author_avatar }}" alt="{{ author_name }}">
+          {% else %}
+            <img src="/{{ author_avatar }}" alt="{{ author_name }}">
+          {% endif %}
+        {% else %}
+          {{ author_name.split(' ')[:2]|map('first')|map('upper')|join('') }}
+        {% endif %}
+      </a>
+      <div class="post-byline-info">
+        <a href="{{ SITEURL }}/{{ author.url }}" class="post-byline-name">{{ author_name }}</a>
+        <div class="post-byline-meta">
+          <time datetime="{{ article.locale_date }}">{{ article.locale_date }}</time>
+          {% if article.category %}<span>· {{ article.category }}</span>{% endif %}
+          {% if article.modified %}<span>· {{ UI_STRINGS.updated_on[DEFAULT_LANG] }} {{ article.locale_modified }}</span>{% endif %}
+        </div>
+      </div>
     {% endfor %}
-    <span><time datetime="{{ article.locale_date }}">{{ article.locale_date }}</time></span>
-    {% if article.category %}<span>{{ article.category }}</span>{% endif %}
-    {% if article.modified %}<span>{{ UI_STRINGS.updated_on[DEFAULT_LANG] }} {{ article.locale_modified }}</span>{% endif %}
   </div>
 
   <div class="post-content">
