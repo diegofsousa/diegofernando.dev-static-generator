@@ -1,14 +1,19 @@
-title: About
-date: 2020-09-20 18:50
+title: Sobre
+date: 2026-09-13 12:00
 author: diego
-tags: trabalho colaborativo, git, github, spotify, podcast
+lang: pt-br
 slug: about
 
-# Hi, i'm Diego Fernando <s>🤝</s>🤜🤛
+# Oi, eu sou o Diego Fernando 🤜🤛
 
-I currently have a bachelor's degree in Information Systems at the Federal University of Piauí (UFPI) and currently work with software development (Web fullstack and desktop). I am interested in **software development**, **computer networks** with a focus on innovation and WiFi technology. I had experiences with the following technologies: **Java** (Spring Boot, Play Framework), **Python** (Django, Django Rest Framework), **Scala** (Play Framework, Lagom) and **JavaScript**. Currently, I work as an Information Iechnology Analyst developing solutions based on **microservices**. (Updated on 20/09/2020).
+Sou **engenheiro de software**, atualmente no **iFood**. Vivo no Piauí, no nordeste do Brasil, e divido a atenção entre resolver problema de sistema distribuído e decidir qual MPB entra na próxima playlist.
 
-> [Find me on GitHub](https://github.com/diegofsousa)
+Formado em Sistemas de Informação pela Universidade Federal do Piauí (UFPI), já passei por stacks bem diferentes ao longo da carreira — **Java** (Spring Boot, Play Framework), **Python** (Django, Django Rest Framework), **Scala** (Play Framework, Lagom) e, mais recentemente, tenho me aprofundado em **Go**, que é sobre o que gira boa parte dos posts recentes por aqui.
 
-> [Find me on LinkedIn](https://www.linkedin.com/in/diegofsousa/)
+Gosto de compartilhar o que vou aprendendo — em post, podcast ou código aberto — mais pelo processo de errar e ajustar em público do que por ter a resposta certa de cara.
 
+> "Now is better than never." — meu lema, roubado sem cerimônia do Zen of Python.
+
+> [Me encontra no GitHub](https://github.com/diegofsousa)
+
+> [Me encontra no LinkedIn](https://www.linkedin.com/in/diegofsousa/)

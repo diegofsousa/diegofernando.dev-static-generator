@@ -2,6 +2,7 @@
 #############################################
 :date: 2019-09-26 00:45
 :author: diego
+:lang: pt-br
 :tags: laboratório, cisco
 :slug: configurando-rotas-estaticas-em-uma-rede
 

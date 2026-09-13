@@ -1,6 +1,7 @@
 title: [PT] Adicionando Eclipse Spring Tools 4 ao lançador do Ubuntu
 date: 2020-05-16 23:54
 author: diego
+lang: pt-br
 tags: programação, java, spring, ide, eclipse
 slug: adicionando-eclipse-spring-tools-4-lancador-ubuntu
 og_image: assets/images/tool.jpg

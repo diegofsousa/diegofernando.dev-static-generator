@@ -1,6 +1,7 @@
 title: [PT] Construindo uma ferramenta para criação de notas rápidas
 date: 2021-01-20 01:05
 author: diego
+lang: pt-br
 tags: ferramental, python, recriação, dontpad
 slug: construindo-uma-ferramenta-para-criacao-de-notas-rapidas
 og_image: assets/images/code.jpg

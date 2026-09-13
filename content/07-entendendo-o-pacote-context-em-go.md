@@ -1,6 +1,7 @@
 title: [PT] Entendendo o package Context em Go
 date: 2022-10-09 10:05
 author: diego
+lang: pt-br
 tags: golang, context, programação
 slug: entendendo-o-package-context-em-go
 og_image: assets/images/gophers_working.jpg
@@ -21,9 +22,9 @@ Um exemplo clássico de seu uso é em situações de requisições para API’s 
 
 Antes de começarmos a detalhar os tipos de Context, é importante entendermos como se dá a sua inicialização. **Todo Context para ser usado, deve ser inicializado vazio em algum momento do ciclo de vida**. A própria documentação do Go desencoraja passar `nil` como parâmetro em situações que o requerem. Existem duas formas de inicializá-lo - **context.Background()** e  **context.TODO()**:
 
-### context.Background()
+## context.Background()
 
-```
+```go
 package main
 
 import (
@@ -39,9 +40,9 @@ func main() {
 
 O `context.Backgroud()` nos retorna um Context não nulo e vazio. **Normalmente é usado pela função principal ou *entrypoint* do projeto**.
 
-### context.TODO()
+## context.TODO()
 
-```
+```go
 package main
 
 import (
@@ -67,11 +68,11 @@ Existem basicamente **três tipos** de Context:
 - Deadline
 - Request-scoped values
 
-### Cancellation Signals
+## Cancellation Signals
 
 O tipo **Cancellation Signals** define um Context que pode ter sua execução interrompida através de um comando. Neste caso, a instrução segue o fluxo normal  até que em certo ponto do código seja dada a sua parada. A seguir, um exemplo de implementação:
 
-```
+```go
 package main
 
 import (
@@ -110,14 +111,14 @@ Retornando para a função `main()`, a primeira coisa que fazemos é definir um 
 
 O resultado da execução será semelhante ao *log* abaixo:
 
-```
+```text
 Running at 2022-10-09 16:15:46.80042576 -0300 -03 m=+1.000598497
 Running at 2022-10-09 16:15:47.801454038 -0300 -03 m=+2.001626779
 Running at 2022-10-09 16:15:48.801876258 -0300 -03 m=+3.002048999
 Stopping code execution...
 ```
 
-### Deadline
+## Deadline
 
 Como o próprio termo sugere, um Context do tipo **Deadline** delimita o tempo de execução de uma instrução ou processo. Podemos então informar para a aplicação até quando determinado código pode demorar. Temos duas funções diferentes para trabalhar com **Deadline**:
 
@@ -126,11 +127,11 @@ Como o próprio termo sugere, um Context do tipo **Deadline** delimita o tempo d
 - **`context.WithTimeout()`** - É definido um **valor de tempo a partir do instante que foi instanciado**.
 	- Exemplo: o contexto tem 4 minutos a partir de agora para ser executado.
 
-#### context.WithDeadline()
+### context.WithDeadline()
 
 Vamos então pegar o mesmo código anterior e alterar alguns trechos:
 
-```
+```go
 package main
 
 import (
@@ -167,7 +168,7 @@ Instanciamos uma nova variável `deadline` somando três segundos ao tempo de ag
 
 O resultado da execução do código acima será semelhante a seguinte saída:
 
-```
+```text
 Running at 2022-10-09 17:30:50.492897161 -0300 -03 m=+1.000190057
 Running at 2022-10-09 17:30:51.493583512 -0300 -03 m=+2.000876359
 Running at 2022-10-09 17:30:52.493694606 -0300 -03 m=+3.000987449
@@ -175,11 +176,11 @@ Running at 2022-10-09 17:30:53.493795753 -0300 -03 m=+4.001088530
 Stopping code execution…
 ```
 
-#### context.WithTimeout()
+### context.WithTimeout()
 
 Podemos usar a função `context.WithTimeout()` para produzir o mesmo comportamento. Basta alterarmos as linhas **11** e **12** por:
 
-```
+```go
 deadline := 3 * time.Second
 ctx, cancel := context.WithTimeout(ctx, deadline)
 ```
@@ -191,11 +192,11 @@ A diferença, para o código anterior é que, agora, não precisamos mais fazer 
 Um ponto curioso nessa estrutura é que executamos também o `cancel()`, porém com a palavra-chave `defer` para assegurar que ele será a última coisa a ser executada. Apesar de estarmos delimitando o tempo de execução, **podemos também antecipar o cancelamento da instrução a qualquer momento se sobrepondo a regra do limite de tempo**, assim como explicado na seção **Cancellation Signals**.
 
 
-#### Request-scoped value
+### Request-scoped value
 
 Além de controlar tempo de execução e parada, com Context também é possível passar valores no estilo **chave-valor** para instruções filhas. Esse conceito é importante pois ele **funciona independente se a chamada para as instruções é síncrona ou assíncrona**. Esses valores ficam salvos dentro do contexto e são imutáveis. Vamos detalhar o código abaixo um modelo síncrono:
 
-```
+```go
 package main
 
 import (
@@ -229,7 +230,7 @@ Os casos de uso do Context não se limitam aos aqui apresentados. Atualmente, as
 
 Até a próxima :)
 
-#### Referências
+## Referências
 
 - [https://pkg.go.dev/context](https://pkg.go.dev/context)
 - [https://www.digitalocean.com/community/tutorials/how-to-use-contexts-in-go](https://www.digitalocean.com/community/tutorials/how-to-use-contexts-in-go)

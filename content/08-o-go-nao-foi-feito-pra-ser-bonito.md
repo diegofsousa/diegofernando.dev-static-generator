@@ -1,6 +1,7 @@
 title: O Go não foi feito pra ser bonito... e isso não deveria ser um problema.
 date: 2025-04-20 10:05
 author: diego
+lang: pt-br
 tags: golang, backend, programação
 slug: o-go-nao-foi-feito-pra-ser-bonito
 og_image: assets/images/gopher-misc-3.jpg
@@ -40,12 +41,12 @@ Ok, ainda temos um ponto a discutir. Talvez um dos principais motivos que afasta
 
 Para entender melhor, vamos comparar a sintaxe de Go com outras linguagens. Para sermos justos, os exemplos não utilizarão bibliotecas externas, nem o clássico "Hello, World". As linguagens escolhidas para a análise são Python, JavaScript e Java.
 
-### Requisição HTTP e leitura JSON
+## Requisição HTTP e leitura JSON
 
 Neste primeiro exemplo, faremos uma requisição HTTP e o tratamento da resposta em JSON.
 
-#### Go
-```
+### Go
+```go
 package main
 
 import (
@@ -70,8 +71,8 @@ func main() {
 }
 ```
 
-#### Python
-```
+### Python
+```python
 import urllib.request
 import json
 
@@ -82,8 +83,8 @@ print("First post title:", data[0]["title"])
 
 ```
 
-#### JavaScript
-```
+### JavaScript
+```javascript
 const https = require('https');
 
 https.get('https://jsonplaceholder.typicode.com/posts', res => {
@@ -96,8 +97,8 @@ https.get('https://jsonplaceholder.typicode.com/posts', res => {
 }).on('error', err => console.error(err));
 ```
 
-#### Java
-```
+### Java
+```java
 import java.io.*;
 import java.net.*;
 import javax.json.*;
@@ -119,12 +120,12 @@ public class Main {
 
 ```
 
-### Execução paralela
+## Execução paralela
 
 Agora, executaremos três tarefas simultaneamente. Vale lembrar que Go trata tarefas concorrentes (e não paralelas) com Goroutines.
 
-#### Go
-```
+### Go
+```go
 package main
 
 import (
@@ -151,8 +152,8 @@ func main() {
 
 ```
 
-#### Python
-```
+### Python
+```python
 import threading
 import time
 
@@ -173,12 +174,12 @@ print("All tasks completed")
 
 ```
 
-#### JavaScript
+### JavaScript
 
 Não se aplica.
 
-#### Java
-```
+### Java
+```java
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -207,13 +208,13 @@ public class Main {
 
 ```
 
-### Leitura de arquivo CSV
+## Leitura de arquivo CSV
 
 Por fim, vamos ler um arquivo CSV com os campos `nome,idade` e somar as idades.
 
-#### Go
+### Go
 
-```
+```go
 package main
 
 import (
@@ -241,9 +242,9 @@ func main() {
 
 ```
 
-#### Python
+### Python
 
-```
+```python
 sum_ages = 0
 with open("data.csv") as f:
     for line in f:
@@ -253,8 +254,8 @@ with open("data.csv") as f:
 print("Sum of ages:", sum_ages)
 ```
 
-#### JavaScript
-```
+### JavaScript
+```javascript
 const fs = require('fs');
 
 fs.readFile('data.csv', 'utf8', (err, data) => {
@@ -269,9 +270,9 @@ fs.readFile('data.csv', 'utf8', (err, data) => {
 
 ```
 
-#### Java
+### Java
 
-```
+```java
 import java.io.*;
 import java.nio.file.*;
 
@@ -298,7 +299,7 @@ Essas são reflexões que fazem parte do dia a dia de um engenheiro de software.
 
 Até a próxima :)
 
-#### Referências
+# Referências
 
 - [https://go.dev/wiki/Benchmarks](https://go.dev/wiki/Benchmarks)
 - [https://dev.to/nigelsilonero/how-does-golang-handle-concurrency-better-than-other-languages-2e51?utm_source=chatgpt.com](https://dev.to/nigelsilonero/how-does-golang-handle-concurrency-better-than-other-languages-2e51)

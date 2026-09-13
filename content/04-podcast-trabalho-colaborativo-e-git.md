@@ -1,6 +1,7 @@
 title: [PT] Podcast - Trabalho colaborativo e Git
 date: 2020-09-20 18:42
 author: diego
+lang: pt-br
 tags: trabalho colaborativo, git, github, spotify, podcast
 slug: podcast-trabalho-colaborativo-e-git
 og_image: assets/images/teamwork.jpg

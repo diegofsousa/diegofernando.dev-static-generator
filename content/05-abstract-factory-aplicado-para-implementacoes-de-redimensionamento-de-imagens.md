@@ -1,6 +1,7 @@
 title: [PT] Padrão Abstract Factory aplicado à diferentes implementações de redimensionamento de imagens
 date: 2020-09-20 18:42
 author: diego
+lang: pt-br
 tags: design pattern, java, gof, padrão, abstract fatory
 slug: padrao-abstract-factory-aplicado-a-redimensionamento-de-imagens
 og_image: assets/images/factory.webp

@@ -1,6 +1,7 @@
 title: Structs performáticas em Go - padding, word size e clock
 date: 2025-05-11 17:44
 author: diego
+lang: pt-br
 tags: golang, backend, programação
 slug: structs-performaticas-em-go
 og_image: assets/images/order-unsplash.jpg
@@ -18,7 +19,7 @@ Vamos aprofundar a problemática usando um exemplo.
 
 ## Exemplo 1 - *Struct* original
 
-```
+```go
 package main
 
 import (
@@ -39,7 +40,7 @@ type Consumer struct {
 
 No código acima, usamos `unsafe.Sizeof` para imprimir o tamanho total, em bytes, da *struct* Consumer.
 
-```
+```go
 fmt.Printf("Size of Consumer: %d bytes\n", unsafe.Sizeof(c))
 // Saída: Size of Consumer: 40 bytes
 ```
@@ -48,7 +49,7 @@ fmt.Printf("Size of Consumer: %d bytes\n", unsafe.Sizeof(c))
 
 Agora, vamos fazer uma leve modificação. Iremos **reordenar** os campos da struct `Consumer` pelo tamanho, do maior para o menor:
 
-```
+```go
 type Consumer struct {
 	Score   float64 // 8 bytes
 	Name    string  // 16 bytes
@@ -61,7 +62,7 @@ type Consumer struct {
 
 Executando novamente o código:
 
-```
+```go
 fmt.Printf("Size of Consumer: %d bytes\n", unsafe.Sizeof(c))
 // Saída: Size of Consumer: 32 bytes
 
@@ -116,20 +117,20 @@ Agora, com a nova ordem dos campos, o `Score` ocupa perfeitamente o primeiro blo
 
 Em Go existem ferramentas que analisam automaticamente a **struct** e faz as correções necessárias visando a otimização. Uma dessas ferramentas é o **fieldalignment**. Para fazer a sua instalação execute o comando abaixo:
 
-```
+```shell
 go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest
 ```
 
 Para usar, é bastante simples! Basta rodar o comando `fieldalignment ./...`. Você verá algo como:
 
-```
+```text
 diego@diego-workstation:~$ fieldalignment ./...
 main.go:8:15: struct of size 40 could be 32
 ```
 
 Após isso, para efetuar as alterações, basta passar o argumento `-fix` neste comando:
 
-```
+```shell
 fieldalignment -fix ./...
 ```
 
@@ -139,7 +140,7 @@ Neste post, vimos que até mesmo pequenas mudanças (que às vezes passam desper
 
 Até a próxima :)
 
-#### Referências
+# Referências
 
 - [https://themsaid.com/struct-optimizations-in-go](https://themsaid.com/struct-optimizations-in-go)
 - [https://medium.com/fretebras-tech/dica-de-otimiza%C3%A7%C3%A3o-em-go-a-ordem-dos-campos-em-structs-importa-de9f822b6119](https://medium.com/fretebras-tech/dica-de-otimiza%C3%A7%C3%A3o-em-go-a-ordem-dos-campos-em-structs-importa-de9f822b6119)
