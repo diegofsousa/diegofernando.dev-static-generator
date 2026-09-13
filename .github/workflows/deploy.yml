@@ -1,0 +1,51 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      # Bate com TIMEZONE em pelicanconf.py. Sem isso, o runner (UTC)
+      # interpreta o mtime dos arquivos com o offset errado e todo
+      # article:modified_time sai adiantado em 3 horas.
+      TZ: America/Fortaleza
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - run: sudo locale-gen pt_BR.UTF-8
+
+      - run: pip install -r requirements.txt
+
+      # Um checkout novo zera o mtime de todo arquivo pra "agora". Como
+      # DEFAULT_DATE='fs' faz o Pelican usar o mtime como data de
+      # modificação do post, sem isso todo artigo apareceria como
+      # "Updated on" a data do build, mesmo sem edição real.
+      - name: Restore content mtimes from git history
+        run: |
+          find content -type f | while read -r f; do
+            ts=$(git log -1 --format=%ct -- "$f")
+            if [ -n "$ts" ]; then
+              touch -d "@$ts" "$f"
+            fi
+          done
+
+      - run: python -m pelican content -s publishconf.py -o output
+
+      - name: Publish to diegofsousa.github.io
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.PAGES_DEPLOY_TOKEN }}
+          external_repository: diegofsousa/diegofsousa.github.io
+          publish_branch: master
+          publish_dir: output
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Deploy diegofernando.dev-static-generator@${{ github.sha }}'
