@@ -1,0 +1,26 @@
+{# <!-- Choosing cover image: root_siteurl always points at the real
+     domain, since SITEURL is per-subsite (e.g. .../en) and content
+     assets aren't duplicated into each subsite. --> #}
+{% set root_siteurl = main_siteurl|default(SITEURL) %}
+{% if HEADER_COVER %}
+  {% set default_cover = root_siteurl+"/"+HEADER_COVER %}
+{% else %}
+  {% set default_cover = root_siteurl+"/"+THEME_STATIC_DIR+"/images/home-bg.jpg" %}
+{% endif %}
+
+{# <!-- Choosing description --> #}
+{% if SITESUBTITLE %}
+    {% set description = SITESUBTITLE %}
+{% else %}
+    {% set description = 'View the blog.' %}
+{% endif %}
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Website",
+  "name": " {{ SITENAME }} ",
+  "url" : "{{ SITEURL }}/",
+  "image": "{{ default_cover }}",
+  "description": "{{ description }}"
+}
+</script>

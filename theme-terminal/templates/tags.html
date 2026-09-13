@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ SITENAME }} - {{ UI_STRINGS.nav_tags[DEFAULT_LANG]|capitalize }}{% endblock %}
+
+{% block content %}
+<main>
+  <p class="section-label">{{ UI_STRINGS.nav_tags[DEFAULT_LANG] }}</p>
+  <div class="tag-cloud">
+    {% for tag, articles in tags|sort %}
+      <a href="{{ SITEURL }}/{{ tag.url }}" title="{{ articles|count }} {{ UI_STRINGS.posts_tagged[DEFAULT_LANG] }} '{{ tag }}'">{{ tag }} <span style="color:var(--fg-faint)">({{ articles|count }})</span></a>
+    {% endfor %}
+  </div>
+</main>
+{% endblock content %}

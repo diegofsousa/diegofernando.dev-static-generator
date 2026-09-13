@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% set author_key = author.name.lower() %}
+{% set bio = AUTHORS_BIO[author_key] if AUTHORS_BIO and author_key in AUTHORS_BIO else None %}
+{% set author_name = bio.name if bio and bio.name else author.name|title %}
+
+{% block title %}{{ SITENAME }} - {{ author_name }}{% endblock %}
+
+{% block content %}
+<main>
+  <p class="section-label">{{ UI_STRINGS.posts_by[DEFAULT_LANG] }} {{ author_name }} ({{ articles|count }})</p>
+  {% if bio and bio.bio %}
+  <p class="post-content" style="margin-bottom:22px;">{{ bio.bio }}</p>
+  {% endif %}
+  {% include "partials/loop.html" %}
+</main>
+{% endblock content %}

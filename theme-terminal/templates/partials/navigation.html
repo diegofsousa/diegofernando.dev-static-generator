@@ -1,0 +1,19 @@
+<nav class="site">
+  <a href="{{ SITEURL }}/"{% if not category and not tag and not page and not article %} class="active"{% endif %}>{{ UI_STRINGS.nav_home[DEFAULT_LANG] }}</a>
+  <a href="{{ SITEURL }}/archives.html">{{ UI_STRINGS.nav_archives[DEFAULT_LANG] }}</a>
+  <a href="{{ SITEURL }}/tags.html">{{ UI_STRINGS.nav_tags[DEFAULT_LANG] }}</a>
+  {% for p in pages %}
+    <a href="{{ SITEURL }}/{{ p.url }}"{% if page and page == p %} class="active"{% endif %}>{{ p.title|lower }}</a>
+  {% endfor %}
+  {% if FEED_ALL_ATOM %}
+    <a href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" class="rss">{{ UI_STRINGS.nav_rss[DEFAULT_LANG] }}</a>
+  {% elif FEED_ALL_RSS %}
+    <a href="{{ SITEURL }}/{{ FEED_ALL_RSS }}" class="rss">{{ UI_STRINGS.nav_rss[DEFAULT_LANG] }}</a>
+  {% endif %}
+  {% if extra_siteurls is defined %}
+    {% for lang, url in extra_siteurls.items() %}
+      <a href="{{ url }}/" class="lang-switch" hreflang="{{ lang }}">{{ UI_STRINGS.language_switch[DEFAULT_LANG] }}</a>
+    {% endfor %}
+  {% endif %}
+  <button type="button" id="search-toggle" class="search-toggle" aria-haspopup="dialog" aria-controls="search-overlay">{{ UI_STRINGS.nav_search[DEFAULT_LANG] }}</button>
+</nav>

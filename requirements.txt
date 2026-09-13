@@ -7,6 +7,7 @@ Jinja2==3.0.0
 Markdown==3.4.1
 MarkupSafe==2.1.1
 pelican==4.8.0
+pelican-i18n-subsites==0.9.0
 pelican-webassets==2.0.0
 Pygments==2.13.0
 python-dateutil==2.8.2

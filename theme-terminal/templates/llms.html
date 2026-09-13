@@ -1,0 +1,22 @@
+# {{ SITENAME }}
+
+> {{ SITESUBTITLE }}
+{% set bio = (AUTHORS_BIO.values()|list)[0] if AUTHORS_BIO else None %}
+{% if bio and bio.bio %}
+{{ bio.bio }}
+{% endif %}
+{% if extra_siteurls is defined %}
+{% for lang, url in extra_siteurls.items() %}
+This site is also available in {{ lang }}: {{ url }}/llms.txt
+{% endfor %}
+{% endif %}
+
+## {{ UI_STRINGS.llms_posts[DEFAULT_LANG] }}
+{% for article in articles %}
+- [{{ article.title|striptags }}]({{ SITEURL }}/{{ article.url }}): {{ article.summary|striptags|truncate(160) }}
+{% endfor %}
+
+## {{ UI_STRINGS.llms_pages[DEFAULT_LANG] }}
+{% for page in pages %}
+- [{{ page.title|striptags }}]({{ SITEURL }}/{{ page.url }})
+{% endfor %}

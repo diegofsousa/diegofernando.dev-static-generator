@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+    {% include 'partials/og.html' %}
+    {% include 'partials/jsonld.html' %}
+{% endblock %}
+
+{% block content %}
+<main>
+  <p class="section-label">{{ UI_STRINGS.latest_posts[DEFAULT_LANG] }}</p>
+  {% include "partials/loop.html" %}
+</main>
+{% endblock content %}

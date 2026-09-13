@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ SITENAME }} - {{ UI_STRINGS.categories_label[DEFAULT_LANG]|capitalize }}{% endblock %}
+
+{% block content %}
+<main>
+  <p class="section-label">{{ UI_STRINGS.categories_label[DEFAULT_LANG] }}</p>
+  <ul class="entry-list">
+  {% for category, articles in categories|sort %}
+    <li><a href="{{ SITEURL }}/{{ category.url }}">{{ category }}</a> <span class="count">({{ articles|count }})</span></li>
+  {% endfor %}
+  </ul>
+</main>
+{% endblock content %}

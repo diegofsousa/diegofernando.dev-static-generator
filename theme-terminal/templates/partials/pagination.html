@@ -1,0 +1,11 @@
+{% if DEFAULT_PAGINATION %}
+<nav class="pager">
+  {% if articles_page.has_previous() %}
+    <a href="{{ SITEURL }}/{{ articles_previous_page.url }}">{{ UI_STRINGS.pager_newer[DEFAULT_LANG] }}</a>
+  {% endif %}
+  <span>{{ UI_STRINGS.pager_page[DEFAULT_LANG] }} {{ articles_page.number }} {{ UI_STRINGS.pager_of[DEFAULT_LANG] }} {{ articles_paginator.num_pages }}</span>
+  {% if articles_page.has_next() %}
+    <a href="{{ SITEURL }}/{{ articles_next_page.url }}">{{ UI_STRINGS.pager_older[DEFAULT_LANG] }}</a>
+  {% endif %}
+</nav>
+{% endif %}

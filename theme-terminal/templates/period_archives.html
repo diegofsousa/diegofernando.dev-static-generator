@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{{ SITENAME }} - {{ UI_STRINGS.nav_archives[DEFAULT_LANG]|capitalize }} {{ period|reverse|join(' ') }}{% endblock %}
+
+{% block content %}
+<main>
+  <p class="section-label">{{ UI_STRINGS.nav_archives[DEFAULT_LANG] }} — {{ period|reverse|join(' ') }}</p>
+  <dl class="simple-list">
+  {% for article in dates %}
+      <dt>{{ article.locale_date }}</dt>
+      <dd><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
+  {% endfor %}
+  </dl>
+</main>
+{% endblock content %}

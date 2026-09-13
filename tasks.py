@@ -23,6 +23,8 @@ CONFIG = {
     'deploy_path': SETTINGS['OUTPUT_PATH'],
     # Port for `serve`
     'port': 8000,
+    # Pinned so local and CI builds index with the same pagefind engine.
+    'pagefind': 'npx --yes pagefind@1.5.2',
 }
 
 @task
@@ -32,15 +34,20 @@ def clean(c):
         shutil.rmtree(CONFIG['deploy_path'])
         os.makedirs(CONFIG['deploy_path'])
 
+def _index(c):
+    c.run('{pagefind} --site {deploy_path}'.format(**CONFIG))
+
 @task
 def build(c):
     """Build local version of site"""
     c.run('pelican -s {settings_base}'.format(**CONFIG))
+    _index(c)
 
 @task
 def rebuild(c):
     """`build` with the delete switch"""
     c.run('pelican -d -s {settings_base}'.format(**CONFIG))
+    _index(c)
 
 @task
 def regenerate(c):
@@ -72,6 +79,7 @@ def reserve(c):
 def preview(c):
     """Build production version of site"""
     c.run('pelican -s {settings_publish}'.format(**CONFIG))
+    _index(c)
 
 @task
 def livereload(c):
@@ -101,6 +109,7 @@ def livereload(c):
 def publish(c):
     """Publish to production via rsync"""
     c.run('pelican -s {settings_publish}'.format(**CONFIG))
+    _index(c)
     c.run(
         'rsync --delete --exclude ".DS_Store" -pthrvz -c '
         '-e "ssh -p {ssh_port}" '

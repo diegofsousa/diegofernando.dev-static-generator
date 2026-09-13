@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block canonical_url %}<link href="{{ SITEURL }}/{{ article.url }}" rel="canonical" />{% endblock canonical_url %}
+{% block head %}
+  {{ super() }}
+
+  {% for keyword in article.keywords %}
+    <meta name="keywords" content="{{ keyword }}">
+  {% endfor %}
+
+  {% if description %}
+    <meta name="description" content="{{ description }}">
+  {% elif article.headline %}
+    <meta name="description" content="{{ article.headline }}">
+  {% elif article.summary %}
+    <meta name="description" content="{{ article.summary|striptags|truncate(140) }}">
+  {% endif %}
+
+  {% for author in article.authors %}
+    <meta name="author" content="{{ author }}">
+  {% endfor %}
+
+  {% for tag in article.tags %}
+    <meta name="tags" content="{{ tag }}">
+  {% endfor %}
+
+  {% include 'partials/og_article.html' %}
+  {% include 'partials/jsonld_article.html' %}
+{% endblock %}
+
+{% block content %}
+<article class="post" data-pagefind-body>
+  <p class="post-crumb"><a href="{{ SITEURL }}/">{{ UI_STRINGS.breadcrumb_posts[DEFAULT_LANG] }}</a> / {{ article.title }}</p>
+  <h2 class="post-title" data-pagefind-meta="title">{{ article.title }}</h2>
+  <div class="post-meta">
+    {% for author in article.authors %}
+      {% set author_name = author.name|title %}
+      {% if AUTHORS_BIO and author.name.lower() in AUTHORS_BIO %}
+        {% set author_name = AUTHORS_BIO[author.name.lower()].name or author.name %}
+      {% endif %}
+      <span><b><a href="{{ SITEURL }}/{{ author.url }}">{{ author_name }}</a></b></span>
+    {% endfor %}
+    <span><time datetime="{{ article.locale_date }}">{{ article.locale_date }}</time></span>
+    {% if article.category %}<span>{{ article.category }}</span>{% endif %}
+    {% if article.modified %}<span>{{ UI_STRINGS.updated_on[DEFAULT_LANG] }} {{ article.locale_modified }}</span>{% endif %}
+  </div>
+
+  <div class="post-content">
+    {{ article.content }}
+  </div>
+
+  {% if article.tags %}
+  <div class="post-tags">
+    {% for tag in article.tags %}<a class="tag" href="{{ SITEURL }}/{{ tag.url }}">{{ tag|escape }}</a>{% endfor %}
+  </div>
+  {% endif %}
+
+  {% if article.prev_article or article.next_article %}
+  <div class="updown">
+    {% if article.prev_article %}
+    <a class="prev" href="{{ SITEURL }}/{{ article.prev_article.url }}">
+      <span class="lbl">{{ UI_STRINGS.prev[DEFAULT_LANG] }}</span><span>{{ article.prev_article.title }}</span>
+    </a>
+    {% endif %}
+    {% if article.next_article %}
+    <a class="next" href="{{ SITEURL }}/{{ article.next_article.url }}">
+      <span class="lbl">{{ UI_STRINGS.next[DEFAULT_LANG] }}</span><span>{{ article.next_article.title }}</span>
+    </a>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if GISCUS_REPO and article.status != "draft" %}
+  <div class="discuss">
+    <p class="section-label">{{ UI_STRINGS.comments[DEFAULT_LANG] }}</p>
+    <script src="https://giscus.app/client.js"
+      data-repo="{{ GISCUS_REPO }}"
+      data-repo-id="{{ GISCUS_REPO_ID }}"
+      data-category="{{ GISCUS_CATEGORY }}"
+      data-category-id="{{ GISCUS_CATEGORY_ID }}"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="transparent_dark"
+      data-lang="{{ DEFAULT_LANG[:2] }}"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+  {% endif %}
+</article>
+{% endblock content %}

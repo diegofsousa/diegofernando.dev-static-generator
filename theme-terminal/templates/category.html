@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}{{ SITENAME }} - {{ category }}{% endblock %}
+
+{% block content %}
+<main>
+  <p class="section-label">{{ UI_STRINGS.posts_in_category[DEFAULT_LANG] }} "{{ category }}" ({{ articles|count }})</p>
+  {% include "partials/loop.html" %}
+</main>
+{% endblock content %}

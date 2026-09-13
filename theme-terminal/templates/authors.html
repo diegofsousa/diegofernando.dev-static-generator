@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}{{ SITENAME }} - {{ UI_STRINGS.authors_label[DEFAULT_LANG]|capitalize }}{% endblock title %}
+
+{% block content %}
+<main>
+  <p class="section-label">{{ UI_STRINGS.authors_label[DEFAULT_LANG] }}</p>
+  <ul class="entry-list">
+  {% for author, articles in authors|sort %}
+    {% set author_name = author.name|title %}
+    {% if AUTHORS_BIO and author.name.lower() in AUTHORS_BIO %}
+        {% set author_name = AUTHORS_BIO[author.name.lower()].name or author.name %}
+    {% endif %}
+    <li><a href="{{ SITEURL }}/{{ author.url }}">{{ author_name }}</a> <span class="count">({{ articles|count }})</span></li>
+  {% endfor %}
+  </ul>
+</main>
+{% endblock content %}
